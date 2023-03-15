@@ -6,11 +6,11 @@ if (!defined('MY_APP') && basename($_SERVER['PHP_SELF']) == basename(__FILE__)) 
 }
 
 require_once __DIR__ . "/RestAPI.php";
-require_once __DIR__ . "/../business-logic/AppsService.php";
+require_once __DIR__ . "/../business-logic/UsersService.php";
 
 // Class for handling requests to "api/Customer"
 
-class AppsAPI extends RestAPI
+class UsersAPI extends RestAPI
 {
 
     // Handles the request by calling the appropriate member function
@@ -63,18 +63,18 @@ class AppsAPI extends RestAPI
     // Gets all customers and sends them to the client as JSON
     private function getAll()
     {
-        $apps = AppsService::getAllCustomers();
+        $users = UsersService::getAllCustomers();
 
-        $this->sendJson($apps);
+        $this->sendJson($users);
     }
 
     // Gets one and sends it to the client as JSON
     private function getById($id)
     {
-        $app = AppsService::getCustomerById($id);
+        $user = UsersService::getCustomerById($id);
 
-        if ($app) {
-            $this->sendJson($app);
+        if ($user) {
+            $this->sendJson($user);
         } else {
             $this->notFound();
         }
@@ -84,13 +84,12 @@ class AppsAPI extends RestAPI
     // inserting it in the database.
     private function postOne()
     {
-        $app = new AppsModel();
+        $user = new UsersModel();
 
-        $app->app_name = $this->body["app_name"];
-        $app->description = $this->body["description"];
-        $app->price = $this->body["price"];
+        $user->first_name = $this->body["first_name"];
+        $user->last_name = $this->body["last_name"];
 
-        $success = AppsService::saveCustomer($app);
+        $success = UsersService::saveCustomer($user);
 
         if($success){
             $this->created();
@@ -104,13 +103,12 @@ class AppsAPI extends RestAPI
     // by sending it to the DB
     private function putOne($id)
     {
-        $app = new AppsModel();
+        $user = new UsersModel();
 
-        $app->app_name = $this->body["app_name"];
-        $app->description = $this->body["description"];
-        $app->price = $this->body["price"];
+        $user->first_name = $this->body["first_name"];
+        $user->last_name = $this->body["last_name"];
 
-        $success = AppsService::updateCustomerById($id, $app);
+        $success = UsersService::updateCustomerById($id, $user);
 
         if($success){
             $this->ok();
@@ -123,13 +121,13 @@ class AppsAPI extends RestAPI
     // Deletes the customer with the specified ID in the DB
     private function deleteOne($id)
     {
-        $app = AppsService::getCustomerById($id);
+        $user = UsersService::getCustomerById($id);
 
-        if($app == null){
+        if($user == null){
             $this->notFound();
         }
 
-        $success = AppsService::deleteCustomerById($id);
+        $success = UsersService::deleteCustomerById($id);
 
         if($success){
             $this->noContent();
