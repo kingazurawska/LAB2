@@ -63,7 +63,7 @@ class AppsAPI extends RestAPI
     // Gets all customers and sends them to the client as JSON
     private function getAll()
     {
-        $apps = AppsService::getAllCustomers();
+        $apps = AppsService::getAllApps();
 
         $this->sendJson($apps);
     }
@@ -71,7 +71,7 @@ class AppsAPI extends RestAPI
     // Gets one and sends it to the client as JSON
     private function getById($id)
     {
-        $app = AppsService::getCustomerById($id);
+        $app = AppsService::getAppById($id);
 
         if ($app) {
             $this->sendJson($app);
@@ -90,7 +90,7 @@ class AppsAPI extends RestAPI
         $app->description = $this->body["description"];
         $app->price = $this->body["price"];
 
-        $success = AppsService::saveCustomer($app);
+        $success = AppsService::saveApp($app);
 
         if($success){
             $this->created();
@@ -110,7 +110,7 @@ class AppsAPI extends RestAPI
         $app->description = $this->body["description"];
         $app->price = $this->body["price"];
 
-        $success = AppsService::updateCustomerById($id, $app);
+        $success = AppsService::updateAppById($id, $app);
 
         if($success){
             $this->ok();
@@ -123,13 +123,13 @@ class AppsAPI extends RestAPI
     // Deletes the customer with the specified ID in the DB
     private function deleteOne($id)
     {
-        $app = AppsService::getCustomerById($id);
+        $app = AppsService::getAppById($id);
 
         if($app == null){
             $this->notFound();
         }
 
-        $success = AppsService::deleteCustomerById($id);
+        $success = AppsService::deleteAppById($id);
 
         if($success){
             $this->noContent();

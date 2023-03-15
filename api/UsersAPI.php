@@ -63,7 +63,7 @@ class UsersAPI extends RestAPI
     // Gets all customers and sends them to the client as JSON
     private function getAll()
     {
-        $users = UsersService::getAllCustomers();
+        $users = UsersService::getAllUsers();
 
         $this->sendJson($users);
     }
@@ -71,7 +71,7 @@ class UsersAPI extends RestAPI
     // Gets one and sends it to the client as JSON
     private function getById($id)
     {
-        $user = UsersService::getCustomerById($id);
+        $user = UsersService::getUserById($id);
 
         if ($user) {
             $this->sendJson($user);
@@ -89,7 +89,7 @@ class UsersAPI extends RestAPI
         $user->first_name = $this->body["first_name"];
         $user->last_name = $this->body["last_name"];
 
-        $success = UsersService::saveCustomer($user);
+        $success = UsersService::saveUser($user);
 
         if($success){
             $this->created();
@@ -108,7 +108,7 @@ class UsersAPI extends RestAPI
         $user->first_name = $this->body["first_name"];
         $user->last_name = $this->body["last_name"];
 
-        $success = UsersService::updateCustomerById($id, $user);
+        $success = UsersService::updateUserById($id, $user);
 
         if($success){
             $this->ok();
@@ -121,13 +121,13 @@ class UsersAPI extends RestAPI
     // Deletes the customer with the specified ID in the DB
     private function deleteOne($id)
     {
-        $user = UsersService::getCustomerById($id);
+        $user = UsersService::getUserById($id);
 
         if($user == null){
             $this->notFound();
         }
 
-        $success = UsersService::deleteCustomerById($id);
+        $success = UsersService::deleteUserById($id);
 
         if($success){
             $this->noContent();

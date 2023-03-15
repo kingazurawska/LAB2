@@ -11,7 +11,7 @@ class AppsService{
 
     // Get one customer by creating a database object 
     // from data-access layer and calling its getOne function.
-    public static function getCustomerById($id){
+    public static function getAppById($id){
         $apps_database = new AppsDatabase();
 
         $app = $apps_database->getOne($id);
@@ -27,7 +27,7 @@ class AppsService{
 
     // Get all customers by creating a database object 
     // from data-access layer and calling its getAll function.
-    public static function getAllCustomers(){
+    public static function getAllApps(){
         $apps_database = new AppsDatabase();
 
         $apps = $apps_database->getAll();
@@ -43,7 +43,7 @@ class AppsService{
 
     // Save a customer to the database by creating a database object 
     // from data-access layer and calling its insert function.
-    public static function saveCustomer(AppsModel $app){
+    public static function saveApp(AppsModel $app){
         $apps_database = new AppsDatabase();
 
         // If you need to validate data or control what 
@@ -58,7 +58,7 @@ class AppsService{
 
     // Update the customer in the database by creating a database object 
     // from data-access layer and calling its update function.
-    public static function updateCustomerById($app_id, AppsModel $app){
+    public static function updateAppById($app_id, AppsModel $app){
         $apps_database = new AppsDatabase();
 
         // If you need to validate data or control what 
@@ -73,7 +73,7 @@ class AppsService{
 
     // Delete the customer from the database by creating a database object 
     // from data-access layer and calling its delete function.
-    public static function deleteCustomerById($app_id){
+    public static function deleteAppById($app_id){
         $apps_database = new AppsDatabase();
 
         // If you need to validate data or control what 

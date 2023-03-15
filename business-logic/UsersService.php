@@ -11,7 +11,7 @@ class UsersService{
 
     // Get one customer by creating a database object 
     // from data-access layer and calling its getOne function.
-    public static function getCustomerById($id){
+    public static function getUserById($id){
         $users_database = new UsersDatabase();
 
         $user = $users_database->getOne($id);
@@ -27,7 +27,7 @@ class UsersService{
 
     // Get all customers by creating a database object 
     // from data-access layer and calling its getAll function.
-    public static function getAllCustomers(){
+    public static function getAllUsers(){
         $users_database = new UsersDatabase();
 
         $users = $users_database->getAll();
@@ -43,7 +43,7 @@ class UsersService{
 
     // Save a customer to the database by creating a database object 
     // from data-access layer and calling its insert function.
-    public static function saveCustomer(UsersModel $user){
+    public static function saveUser(UsersModel $user){
         $users_database = new UsersDatabase();
 
         // If you need to validate data or control what 
@@ -58,7 +58,7 @@ class UsersService{
 
     // Update the customer in the database by creating a database object 
     // from data-access layer and calling its update function.
-    public static function updateCustomerById($user_id, UsersModel $user){
+    public static function updateUserById($user_id, UsersModel $user){
         $users_database = new UsersDatabase();
 
         // If you need to validate data or control what 
@@ -73,7 +73,7 @@ class UsersService{
 
     // Delete the customer from the database by creating a database object 
     // from data-access layer and calling its delete function.
-    public static function deleteCustomerById($user_id){
+    public static function deleteUserById($user_id){
         $users_database = new UsersDatabase();
 
         // If you need to validate data or control what 
